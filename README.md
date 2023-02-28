@@ -1,12 +1,18 @@
 # RSI Analysis Program
 
-This program uses python, matplotlib, tkinter and yfinance (amongst other libraries).
+DESCRIPTION: This program is a Relative Strength Index Tool.
 
-The user will enter a ticker code for a stock (e.g. GLD, TSLA) and a start date, then the program will use yahoo finance to retrieve the RSI data
-for that stock, from the start date provided, to the current date. The program will then give the user that information in a graphical representation of
-said data
+OVERVIEW: The user enters a ticker code for a stock (e.g. GLD, TSLA) and a start date, then the program will use yahoo finance to retrieve the RSI data
+for that stock, from the start date provided, to the current date. The program will then give the user that information in a graphical representation using the matplotlib library. 
 
-
+Libraries:
+- tkinter
+- tkcalendar
+- yfinance (yahoo finance)
+- pandas
+- pandas_datareader
+- datetime
+- matplotlib.pyplot
 
 Key Definitions and Concepts
 - Relative Strength Index (RSI): Momentum oscillator that measures the speed and change of price movements
