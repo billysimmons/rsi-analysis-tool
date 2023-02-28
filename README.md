@@ -4,7 +4,8 @@ DESCRIPTION: This program is a Relative Strength Index Tool.
 
 OVERVIEW: The user enters a ticker code for a stock (e.g. GLD, TSLA) and a start date, then the program will use yahoo finance to retrieve the RSI data
 for that stock, from the start date provided, to the current date. The program will then give the user that information in a graphical representation using the matplotlib library. 
-  
+<br />
+<br />
 Libraries:  
 - tkinter
 - tkcalendar
@@ -13,7 +14,8 @@ Libraries:
 - pandas_datareader
 - datetime
 - matplotlib.pyplot
-  
+<br />
+<br />
 Key Definitions and Concepts
 - Relative Strength Index (RSI): Momentum oscillator that measures the speed and change of price movements
 - Relative strength: Type of momentum investing where investors select investments that have been outperforming their market or benchmark
