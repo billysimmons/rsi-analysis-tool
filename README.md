@@ -1,6 +1,6 @@
 # RSI Analysis Tool 📈
 
-This program is a Relative Strength Index (RSI) tool for measuring the speed and change of price movements.
+Relative Strength Index (RSI) tool for measuring the speed and change of price movements.
 
 ## Definitions and Concepts
 
