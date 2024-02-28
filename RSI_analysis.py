@@ -8,13 +8,12 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 
-## CALCULATE RELATIVE STRENGTH FUNCTION ##
 def calculate_rs(data, ticker, button):
     # DESCRIPTION: Will use the positive and negative difference values in closing prices
     # to get an average gain and loss value (using a moving average specified as "days") 
     # for a stock, then calculate the RSI using these values
 
-    button.destroy() # Delete the "Graph Now!" Button
+    button.destroy()
 
     difference = data["Adj Close"].diff(1) # Calculate adjusted close difference using the current row and previous row  
     difference.dropna(inplace=True) # Uses pandas method dropna to remove rows that contain NULL values
@@ -42,9 +41,6 @@ def calculate_rs(data, ticker, button):
 
 
 def graph(data, ticker):
-    # DESCRIPTION: This function will present the RSI data gathered in a graph 
-    # with over bought and over sold indicator lines
-
     plt.figure(figsize=(10, 6)) # Set window
     plt.plot(data.index, data["RSI"]) # Plot data (combinedDF)
     plt.title("Relative Strength Analysis of " + ticker)
@@ -58,10 +54,9 @@ def graph(data, ticker):
     plt.axhline(80, color="green")
     plt.axhline(90, color="yellow")
     plt.axhline(100, color="red")
-
     plt.show()
 
-## MAIN FUNCTION ##
+
 def main():
     root = Tk()
     root.title("RSI PROGRAM")
@@ -96,17 +91,13 @@ def main():
     start = "01/01/2023"
 
     def handle_confirm():
-        # DESCRIPTION: Will retrieve the values from the ticker entry box and calendar entry,
-        # then will trigger the gathering of stock data using pandas datareader and yahoo fincance 
-        # which then displays the graph button, that executes the calculate_rs function
-        
         nonlocal ticker, start # Allows changing of variables in parent function
 
         ## Handle Stock Data
         ticker = ticker_entry.get()
         start_str = start_cal.get_date()
         start = dt.datetime.strptime(start_str, "%m/%d/%Y")
-        end = dt.datetime.now()  # Gets the current date and time
+        end = dt.datetime.now() 
 
         ## Get yahoo data
         yf.pdr_override() # Overide data output for yahoo finance due to API change (TypeError: string indices must be integers)
@@ -118,7 +109,6 @@ def main():
         graph_button.configure(bg="white")
         graph_button.pack()
 
-    ## Confirm button 
     confirm_button = ttk.Button(root, text="Confirm Ticker", command=handle_confirm)
     confirm_button.pack()
 
