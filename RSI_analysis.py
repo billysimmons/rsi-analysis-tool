@@ -1,22 +1,12 @@
-#RSI_analysis.py 
-
-## NOTES
-# Relative Strength Index (RSI): Momentum oscillator that measures the speed and change of price movements
-# Relative strength: Type of momentum investing where investors select investments that have been outperforming their market or benchmark
-# RSI Formula RSI = 100.0 - (100.0 / (1.0 + Relative Strength))
-# Moving Average: Average change overtime to determine trend direction 
-# Over bought/ sold lines: RSI is considered overbought when above 70 and oversold when below 30.
-
-
 ## IMPORTS
 from tkinter import *
+from tkinter import ttk
 from tkcalendar import *
 import yfinance as yf
 from pandas_datareader import data as pdr
 import pandas as pd 
 import datetime as dt
 import matplotlib.pyplot as plt
-
 
 ## CALCULATE RELATIVE STRENGTH FUNCTION ##
 def calculate_rs(data, ticker, button):
@@ -71,48 +61,39 @@ def graph(data, ticker):
 
     plt.show()
 
-
 ## MAIN FUNCTION ##
 def main():
-    # DESCRIPTION: Main function for RSI program and GUI
-
-    ## Create GUI with tkinter
     root = Tk()
     root.title("RSI PROGRAM")
     root.geometry("1000x600")
+    root.configure(bg="#f0f0f0") 
 
-    ## Info 1 label
-    info = Label(root, 
-        text="""Welcome to the RSI Analysis Program!!\n\n
-        RSI (Relative Strength Index):\n
-        The momentum oscillator measuring speed and change of price movement\n""",
-        bd=1, relief="sunken",
-        width=150,
-        borderwidth=0,
-        font=("Helvetica", 13)) 
-    info.pack(pady = 20) # Info label 1
+    style = ttk.Style()
+    style.theme_use('clam')
 
-    ## Info 2 label
-    info2 = Label(root, 
-        text="Please enter the ticker code of your stock, and a start date for the data",
-        bd=1 ,relief="sunken",
-        width=150,
-        borderwidth=0,
-        font = ("Helvetica", 13))
-    info2.pack(pady=20) # Info Label 2
+    info_text = "Welcome to the RSI Analysis Program!!\n"
+    info_label = ttk.Label(root, text=info_text, font=("Helvetica", 14), background="#f0f0f0", foreground="#333")
+    info_label.pack(pady=20)
 
-    ## Ticker 
-    ticker_entry = Entry(root, width=50)
-    ticker_entry.pack()
+    info2_text = "Please enter the ticker code of your stock:"
+    info2_label = ttk.Label(root, text=info2_text, font=("Helvetica", 14), background="#f0f0f0", foreground="#333")
+    info2_label.pack(pady=10)
+
+    ticker_entry = ttk.Entry(root, width=30, font=("Helvetica", 12))
     ticker_entry.insert(0, "Enter Ticker Identifier")
+    ticker_entry.pack(pady=10)
     ticker = ""
 
-    ## Start & End Date
-    end = dt.datetime.now()
-    start_cal = Calendar(root, selectmode="day", year=2023, month=3, mindate=dt.datetime(2018, 1, 1))
-    start_cal.pack(pady=20)
-    start = "01/01/2023"
+    info3_text = "Now enter your start date:"
+    info3_label = ttk.Label(root, text=info3_text, font=("Helvetica", 14), background="#f0f0f0", foreground="#333")
+    info3_label.pack(pady=10)
 
+    start_cal = Calendar(root, selectmode="day", year=2023, month=3, mindate=dt.datetime(2018, 1, 1),
+                         font=("Helvetica", 12), selectbackground="#3498db", selectforeground="white",
+                         background="white", foreground="black", bordercolor="black", bd=2, relief="solid", dayforeground="black",
+                         date_pattern="mm/dd/yyyy")
+    start_cal.pack(pady=10)
+    start = "01/01/2023"
 
     def handle_confirm():
         # DESCRIPTION: Will retrieve the values from the ticker entry box and calendar entry,
@@ -124,7 +105,8 @@ def main():
         ## Handle Stock Data
         ticker = ticker_entry.get()
         start_str = start_cal.get_date()
-        start = dt.datetime.strptime(start_str, "%m/%d/%y")
+        start = dt.datetime.strptime(start_str, "%m/%d/%Y")
+        end = dt.datetime.now()  # Gets the current date and time
 
         ## Get yahoo data
         yf.pdr_override() # Overide data output for yahoo finance due to API change (TypeError: string indices must be integers)
@@ -132,16 +114,15 @@ def main():
         
         ## Graph Button 
         graph_button = Button(root, text="Graph Now!", 
-            command= lambda: calculate_rs(data, ticker, graph_button)) # Call calculate_rs function passing itself as a parameter
+                            command=lambda: calculate_rs(data, ticker, graph_button))
+        graph_button.configure(bg="white")
         graph_button.pack()
 
-
     ## Confirm button 
-    confirm_button = Button(root, text="Confirm Ticker", command=handle_confirm)
+    confirm_button = ttk.Button(root, text="Confirm Ticker", command=handle_confirm)
     confirm_button.pack()
 
     root.mainloop()
-
 
 if __name__ == "__main__":
     main()
