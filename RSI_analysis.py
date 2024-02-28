@@ -9,7 +9,7 @@ import datetime as dt
 import matplotlib.pyplot as plt
 
 def calculate_rs(data, ticker, button):
-    # DESCRIPTION: Will use the positive and negative difference values in closing prices
+    # Will use the positive and negative difference values in closing prices
     # to get an average gain and loss value (using a moving average specified as "days") 
     # for a stock, then calculate the RSI using these values
 
