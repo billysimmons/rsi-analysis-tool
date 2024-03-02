@@ -1,6 +1,8 @@
 # RSI Analysis Tool 📈
 
-Relative Strength Index (RSI) tool for measuring the speed and change of price movements.
+Relative Strength Index (RSI) tool for measuring the speed and change of price movements. 
+
+New traders often make the mistake of buying/selling shares without knowing how to gauge the strength and speed of price movements. The intended use case of this RSI tool is to aid traders by quantifying momentum and trend strength, facilitating better market timing and risk management.
 
 ## Definitions and Concepts
 
